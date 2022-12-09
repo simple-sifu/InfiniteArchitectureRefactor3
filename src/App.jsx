@@ -1,6 +1,5 @@
 import "./styles.css";
 import * as React from "react";
-import ExampleComponent from "./Components/ExampleComponent";
 
 const App = props => {
   const data = {
@@ -86,27 +85,34 @@ const App = props => {
         canFinance ? "(has finance)" : "(has no finance)"
       }`,
       canFinance,
-      modelName: {
-        brandVm.models.map((model) => (
-         model.modelName;
-        ))
-      }
+      models: brandVm.models.map(modelVm => {
+        modelVm.hasFinanceApplyLink = Object.hasOwn(
+          modelVm,
+          "financeApplyLink"
+        );
+        return modelVm;
+      })
     };
   });
 
   return (
     <>
       {viewModel.brands.map(brandVm => {
+        console.log("brandVm =", brandVm);
         return (
           <p>
             {brandVm.title}
-            {brandVm.models.map(model => {
-              return (
-                <>
-                &nbsp;&nbsp;<div>model. </div>
-                </>
-              )
-            })}
+            {brandVm.models.map(modelVm => (
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{modelVm.modelName}
+                {modelVm.hasFinanceApplyLink && (
+                  <span>
+                    &nbsp;&nbsp;
+                    <a href="modelVm.financeApplyLink">(apply for finance)</a>
+                  </span>
+                )}
+              </div>
+            ))}
           </p>
         );
       })}
