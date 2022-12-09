@@ -2,7 +2,7 @@ import "./styles.css";
 import * as React from "react";
 import ExampleComponent from "./Components/ExampleComponent";
 
-const App = (props) => {
+const App = props => {
   const data = {
     brands: [
       {
@@ -67,12 +67,22 @@ const App = (props) => {
     ]
   };
 
+  const hasFinance = brand => {
+    let hasFinanceLink = false;
+    brand.models.forEach(model => {
+      if (Object.hasOwn(model, "financeApplyLink")) hasFinanceLink = true;
+    });
+    if (brand.financeLengthInMonths > 0 && hasFinanceLink) {
+      return true;
+    } else return false;
+  };
+
   // create a viewmodel here
   const viewModel = [];
-  viewModel.brands = data.brands.map((brandVm) => {
+  viewModel.brands = data.brands.map(brandVm => {
     return {
       title: `${brandVm.name} has ${brandVm.models.length} cars available ${
-        brandVm.financeLengthInMonths > 0 ? "(has finance)" : "(has no finance)"
+        hasFinance(brandVm) > 0 ? "(has finance)" : "(has no finance)"
       }`
     };
   });
@@ -80,7 +90,7 @@ const App = (props) => {
   return (
     <>
       <ExampleComponent />
-      {viewModel.brands.map((brandVm) => {
+      {viewModel.brands.map(brandVm => {
         return (
           <p>
             {brandVm.title}
