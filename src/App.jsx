@@ -80,21 +80,33 @@ const App = props => {
   // create a viewmodel here
   const viewModel = [];
   viewModel.brands = data.brands.map(brandVm => {
+    const canFinance = hasFinance(brandVm);
     return {
       title: `${brandVm.name} has ${brandVm.models.length} cars available ${
-        hasFinance(brandVm) > 0 ? "(has finance)" : "(has no finance)"
-      }`
+        canFinance ? "(has finance)" : "(has no finance)"
+      }`,
+      canFinance,
+      modelName: {
+        brandVm.models.map((model) => (
+         model.modelName;
+        ))
+      }
     };
   });
 
   return (
     <>
-      <ExampleComponent />
       {viewModel.brands.map(brandVm => {
         return (
           <p>
             {brandVm.title}
-            {/* Begin Here*/}
+            {brandVm.models.map(model => {
+              return (
+                <>
+                &nbsp;&nbsp;<div>model. </div>
+                </>
+              )
+            })}
           </p>
         );
       })}
