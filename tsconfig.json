@@ -1,0 +1,15 @@
+{
+    "strict": true,
+    "include": [
+        "./src/*"
+    ],
+    "compilerOptions": {
+        "lib": [
+            "es6",
+            "dom"
+        ],
+        "jsx": "react",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
+    }
+}
