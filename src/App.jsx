@@ -91,7 +91,8 @@ const App = props => {
           "financeApplyLink"
         );
         return modelVm;
-      })
+      }),
+      brandFeatures: []
     };
   });
 
