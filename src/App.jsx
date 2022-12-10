@@ -92,19 +92,27 @@ const App = props => {
         );
         return modelVm;
       }),
-      brandFeatures: []
+      features: brandVm.models
+        .map(modelVm => {
+          return modelVm.features.reduce((acc, feature) => {
+            acc.push(feature.name);
+            return acc;
+          }, []);
+        })
+        .join(", ")
     };
   });
 
   return (
     <>
       {viewModel.brands.map(brandVm => {
-        console.log("brandVm =", brandVm);
         return (
           <p>
             {brandVm.title}
+            <br />
             {brandVm.models.map(modelVm => (
               <div>
+                <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{modelVm.modelName}
                 {modelVm.hasFinanceApplyLink && (
                   <span>
@@ -114,6 +122,8 @@ const App = props => {
                 )}
               </div>
             ))}
+            <br />
+            <div>{`Brand features : [${brandVm.features}]`}</div>
           </p>
         );
       })}
