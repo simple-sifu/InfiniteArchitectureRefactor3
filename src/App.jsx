@@ -1,7 +1,7 @@
 import "./styles.css";
 import * as React from "react";
 
-const App = props => {
+const App = () => {
   const data = {
     brands: [
       {
@@ -92,14 +92,17 @@ const App = props => {
         );
         return modelVm;
       }),
-      features: brandVm.models
-        .map(modelVm => {
-          return modelVm.features.reduce((acc, feature) => {
-            acc.push(feature.name);
+      features:
+        "[" +
+        brandVm.models
+          .reduce((acc, modelVm) => {
+            modelVm.features.map(feature => {
+              acc.push(feature.name);
+            });
             return acc;
-          }, []);
-        })
-        .join(", ")
+          }, [])
+          .join(", ") +
+        "]"
     };
   });
 
@@ -123,7 +126,7 @@ const App = props => {
               </div>
             ))}
             <br />
-            <div>{`Brand features : [${brandVm.features}]`}</div>
+            <div>{`Brand features : ${brandVm.features}`}</div>
           </p>
         );
       })}
