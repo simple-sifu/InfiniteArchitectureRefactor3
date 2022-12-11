@@ -110,7 +110,7 @@ const App = () => {
     <>
       {viewModel.brands.map(brandVm => {
         return (
-          <div class="brandCard">
+          <div className="brandCard">
             {brandVm.title}
             <br />
             {brandVm.models.map(modelVm => (
